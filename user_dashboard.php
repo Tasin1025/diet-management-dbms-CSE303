@@ -6,10 +6,10 @@ include 'db_config.php';
 session_start();
 
 // Redirect to login if user is not logged in
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'user') {
-    header("Location: login.php");
-    exit();
-}
+// if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'user') {
+//     header("Location: login.php");
+//     exit();
+// }
 
 // Fetch user details from the database
 $user_id = $_SESSION['user_id'];

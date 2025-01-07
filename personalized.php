@@ -1,3 +1,36 @@
+<?php
+// Include database configuration
+include 'db_config.php';
+
+// Start session
+session_start();
+
+// Redirect to login if user is not logged in
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'user') {
+    header("Location: login.php");
+    exit();
+}
+
+// Fetch meals for the logged-in user
+$user_id = $_SESSION['user_id'];
+$sql = "SELECT meal_type, meal_item FROM meals WHERE user_id = ? ORDER BY meal_type";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Organize meals by type
+$meals = [
+    'Breakfast' => [],
+    'Lunch' => [],
+    'Dinner' => []
+];
+
+while ($row = $result->fetch_assoc()) {
+    $meals[$row['meal_type']][] = $row['meal_item'];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,16 +46,15 @@
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="logo">
-            <img src="logo.png" alt="Diet Planner Logo"> <!-- Replace "logo.png" with your logo file path -->
+            <img src="logo.png" alt="Diet Planner Logo">
         </div>
         <ul class="nav-links">
             <li><a href="user_dashboard.php">Home</a></li>
-            <li> <a href="personalized.php">Personalized Diet Plans</a></li>
-            <li> <a href="analysis.php">Detailed Nutritional Analysis</a></li>
-            <li> <a href="grocery.php">Easy Grocery Lists</a></li>
-            <li> <a href="contact.php">Contact Us</a></li>
+            <li><a href="personalized.php">Personalized Diet Plans</a></li>
+            <li><a href="analysis.php">Detailed Nutritional Analysis</a></li>
+            <li><a href="grocery.php">Easy Grocery Lists</a></li>
+            <li><a href="contact.php">Contact Us</a></li>
             <li><a href="logout.php">Logout</a></li>
-
         </ul>
     </nav>
 
@@ -31,42 +63,50 @@
         <h1>Personalized Diet Plans</h1>
         <p>We create meal plans tailored to your unique dietary needs and health goals.</p>
 
-        <!-- Diet Plans -->
-        <div class="diet-plan">
-            <h2>Weight Loss Plan</h2>
-            <ul>
-                <li><strong>Breakfast:</strong> Moong dal chilla, cucumber and tomato salad, fruit salad (mango, papaya,
-                    guava)</li>
-                <li><strong>Lunch:</strong> Brown rice, Grilled Pomfret, sautéed vegetables, cucumber raita</li>
-                <li><strong>Snack:</strong> Roasted chana, 1 banana</li>
-                <li><strong>Dinner:</strong> Moong dal khichdi with vegetables, tomato-based soup</li>
-            </ul>
-        </div>
+        <div class="meal-box-container">
+            <!-- Breakfast Box -->
+            <div class="meal-box">
+                <h2>Breakfast</h2>
+                <?php if (!empty($meals['Breakfast'])): ?>
+                <ul>
+                    <?php foreach ($meals['Breakfast'] as $item): ?>
+                    <li><?php echo htmlspecialchars($item); ?></li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php else: ?>
+                <p>No meals available for Breakfast.</p>
+                <?php endif; ?>
+            </div>
 
-        <div class="diet-plan">
-            <h2>Muscle Gain Plan</h2>
-            <ul>
-                <li><strong>Breakfast:</strong> Boiled eggs, whole wheat chapati with peanut butter, chia lassi</li>
-                <li><strong>Lunch:</strong> Basmati rice, chingri malai curry, sautéed greens, salad</li>
-                <li><strong>Snack:</strong> Muri makha with peanuts, 1 apple or banana</li>
-                <li><strong>Dinner:</strong> Grilled chicken, moong dal soup, lau ghonto, yogurt</li>
-            </ul>
-        </div>
+            <!-- Lunch Box -->
+            <div class="meal-box">
+                <h2>Lunch</h2>
+                <?php if (!empty($meals['Lunch'])): ?>
+                <ul>
+                    <?php foreach ($meals['Lunch'] as $item): ?>
+                    <li><?php echo htmlspecialchars($item); ?></li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php else: ?>
+                <p>No meals available for Lunch.</p>
+                <?php endif; ?>
+            </div>
 
-        <div class="diet-plan">
-            <h2>Diabetes Management Plan</h2>
-            <ul>
-                <li><strong>Breakfast:</strong> Roti (oats or whole wheat) with greens, 1 small apple</li>
-                <li><strong>Lunch:</strong> Red or black rice, vegetable torkari, rohu fish curry, cucumber salad</li>
-                <li><strong>Snack:</strong> Sprouted moong salad, roasted almonds</li>
-                <li><strong>Dinner:</strong> Lau chingri, red lentil soup with vegetables, plain yogurt</li>
-            </ul>
+            <!-- Dinner Box -->
+            <div class="meal-box">
+                <h2>Dinner</h2>
+                <?php if (!empty($meals['Dinner'])): ?>
+                <ul>
+                    <?php foreach ($meals['Dinner'] as $item): ?>
+                    <li><?php echo htmlspecialchars($item); ?></li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php else: ?>
+                <p>No meals available for Dinner.</p>
+                <?php endif; ?>
+            </div>
         </div>
     </section>
-
-</body>
-
-</html>
 </body>
 
 </html>

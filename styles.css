@@ -253,22 +253,7 @@ body {
 }
 
 
-/* Personalized Diet Plans Section */
-.personalized {
-    padding: 50px;
-    text-align: center;
-}
-
-.personalized h1 {
-    font-size: 2.5em;
-    color: #eeeeee;
-}
-
-.personalized p {
-    font-size: 1.2em;
-}
-
-/* Page Content */
+/* Personalized Section */
 .personalized {
     padding: 50px;
     text-align: center;
@@ -284,6 +269,47 @@ body {
     font-size: 1.2em;
     margin-bottom: 40px;
 }
+
+/* Meal Box Container */
+.meal-box-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between boxes */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+/* Individual Meal Box */
+.meal-box {
+    background-color: #f4f4f4;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    width: 300px;
+    padding: 20px;
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.meal-box h2 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.meal-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.meal-box ul li {
+    font-size: 1em;
+    margin: 5px 0;
+}
+
+.meal-box p {
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
 
 /* Diet Plan Styles */
 .diet-plan {
@@ -684,5 +710,104 @@ tbody tr:hover {
     justify-content: center;
     margin: 20px 0;
     margin-top: 35px;
+}
+
+/* Styles specific to Nutritionist Dashboard */
+.dashboard {
+    /* Table Container */
+    padding: 40px 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+/* Patient Table */
+.dashboard .patient-table-section {
+    padding: 40px;
+    text-align: center;
+}
+
+.dashboard .patient-table-section h2 {
+    font-size: 2em;
+    color: #A020F0;
+    margin-bottom: 20px;
+}
+
+.dashboard .table-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.dashboard table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.dashboard th, .dashboard td {
+    padding: 15px;
+    text-align: left;
+    font-size: 1.1em;
+    border-bottom: 1px solid #ddd;
+}
+
+.dashboard th {
+    background-color: #A020F0;
+    color: white;
+}
+
+.dashboard td {
+    background-color: #f9f9f9;
+}
+
+.dashboard textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    resize: vertical;
+    min-height: 60px;
+}
+
+.dashboard button {
+    background-color: #A020F0;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dashboard button:hover {
+    background-color: #8700b3;
+}
+
+/* Search Bar */
+.dashboard .search-header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.dashboard #search-bar {
+    padding: 10px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 80%;
+    max-width: 400px;
+    margin: 0 auto;
+    display: block;
+}
+
+/* Footer */
+.dashboard .footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px;
 }
 

@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $redirect_page = 'user_dashboard.php';
         } elseif ($role === 'nutritionist') {
             $table = 'nutritionists';
-            $redirect_page = 'nutritionist_dasboard.php';
+            $redirect_page = 'nutritionist_dashboard.php';
         } else {
             $error_message = "Invalid role selected.";
         }
