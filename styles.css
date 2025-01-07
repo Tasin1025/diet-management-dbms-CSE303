@@ -560,3 +560,106 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
+.dashboard-header {
+    color: white;
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+/* Table Container */
+.table-container {
+    padding: 40px 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+/* Patient Table */
+.patient-table-section {
+    padding: 40px;
+    text-align: center;
+}
+
+.patient-table-section h2 {
+    font-size: 2em;
+    color: #A020F0;
+    margin-bottom: 20px;
+}
+
+.table-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    font-size: 1.1em;
+    border-bottom: 2px solid #f1f1f1;
+}
+
+th {
+    background-color: #A020F0;
+    color: white;
+}
+
+tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Table Row Hover Effect */
+tbody tr:hover {
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
+
+/* Action Button Styling */
+.edit-button {
+    background-color: #A020F0;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.edit-button:hover {
+    background-color: #8700b3;
+    transform: scale(1.05);
+}
+
+.edit-button:active {
+    transform: scale(1);
+}
+
+/* Search Bar Styling */
+#search-bar {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 350px;
+}
+
+#search-bar:focus {
+    border-color: #A020F0;
+    outline: none;
+}
+.search-header {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    margin-top: 35px;
+}
+
