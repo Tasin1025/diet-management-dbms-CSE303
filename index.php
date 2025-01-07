@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diet Planner</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="logo">
-            <img src="logo.png" alt="Diet Planner Logo"> 
+            <img src="logo.png" alt="Diet Planner Logo">
         </div>
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-           <li> <a href="signup.html">Sign up</a></li>
-           <li> <a href="login.html">Login</a></li>
+            <li><a href="index.php">Home</a></li>
+            <li> <a href="signup.php">Sign up</a></li>
+            <li> <a href="login.php">Login</a></li>
         </ul>
-    </nav> 
+    </nav>
 
     <!-- Hero Section with Get Started Button -->
     <section class="hero" id="home">
         <div class="hero-content">
             <h1>Embrace a Healthier Lifestyle</h1>
             <p>Personalized diet plans based on traditional Bengali cuisine.</p>
-            <a href="signup.html" class="cta">Get Started</a>
+            <a href="signup.php" class="cta">Get Started</a>
         </div>
-    </section> 
+    </section>
 
     <!-- Feature Highlights -->
     <section class="features" id="about">
@@ -71,6 +73,7 @@
     <footer class="footer" id="contact">
         <p>© 2024 Diet Planner. All rights reserved.</p>
     </footer>
-       
+
 </body>
+
 </html>

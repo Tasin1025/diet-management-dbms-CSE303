@@ -39,7 +39,7 @@
             </select>
 
             <button type="submit" class="auth-button">Sign Up</button>
-            <p>Already have an account? <a href="login.html">Login</a></p>
+            <p>Already have an account? <a href="login.php">Login</a></p>
         </form>
     </section>
 

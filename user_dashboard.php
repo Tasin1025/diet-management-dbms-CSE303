@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diet Planner</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="logo">
-            <img src="logo.png" alt="Diet Planner Logo"> 
+            <img src="logo.png" alt="Diet Planner Logo">
         </div>
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-           <li> <a href="personalized.html">Personalized Diet Plans</a></li>
-           <li> <a href="analysis.html">Detailed Nutritional Analysis</a></li>
-           <li> <a href="grocery.html">Easy Grocery Lists</a></li>
-          <li> <a href="contact.html">Contact Us</a></li>
-          
+            <li><a href="index.php">Home</a></li>
+            <li> <a href="personalized.php">Personalized Diet Plans</a></li>
+            <li> <a href="analysis.php">Detailed Nutritional Analysis</a></li>
+            <li> <a href="grocery.php">Easy Grocery Lists</a></li>
+            <li> <a href="contact.php">Contact Us</a></li>
+
         </ul>
-    </nav> 
+    </nav>
 
     <!-- Hero Section with Get Started Button -->
     <section class="hero" id="home">
         <div class="hero-content">
             <h1>Embrace a Healthier Lifestyle</h1>
             <p>Personalized diet plans based on traditional Bengali cuisine.</p>
-            <a href="signup.html" class="cta">Get Started</a>
+            <a href="signup.php" class="cta">Get Started</a>
         </div>
-    </section> 
+    </section>
 
     <!-- Feature Highlights -->
     <section class="features" id="about">
@@ -74,6 +76,7 @@
     <footer class="footer" id="contact">
         <p>© 2024 Diet Planner. All rights reserved.</p>
     </footer>
-       
+
 </body>
+
 </html>
