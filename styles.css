@@ -17,11 +17,22 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #ffffff;
+    background: linear-gradient(rgba(43, 10, 61, 0.7), rgba(43, 10, 61, 0.7)), url('bengali-food.jpg') center/cover no-repeat;      
+}
+
+.hero2 {
+    width:100%;
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
     background: linear-gradient(rgba(43, 10, 61, 0.7), rgba(43, 10, 61, 0.7)), url('bengali-food.jpg') center/cover no-repeat;      
 }
 
 /* Hero Section */
-.hero {
+ .hero {
     background-color: #A020F0;
     color: #ffffff;
     text-align: center;
@@ -31,6 +42,7 @@ body {
     justify-content: center;
     height: 70vh;
 }
+
 
 .hero-content h1 {
     font-size: 2.5em;
@@ -522,6 +534,7 @@ body {
     border: 1px solid #ddd;
     border-radius: 5px;
     width: 100%;
+    text-align: center;
 }
 
 .auth-form button {
