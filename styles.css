@@ -786,6 +786,14 @@ tbody tr:hover {
     background-color: #8700b3;
 }
 
+.dashboard .messages-table-section h2 {
+    font-size: 2em;
+    text-align: center;
+    color: #A020F0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 /* Search Bar */
 .dashboard .search-header {
     margin-bottom: 20px;

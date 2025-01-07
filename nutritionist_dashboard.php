@@ -25,6 +25,10 @@ $sql = "
 ";
 
 $result = $conn->query($sql);
+
+// Fetch all contact messages
+$msg_sql = "SELECT * FROM contact_messages ORDER BY created_at DESC";
+$msg_result = $conn->query($msg_sql);
 ?>
 
 <!DOCTYPE html>
@@ -51,14 +55,47 @@ $result = $conn->query($sql);
         </ul>
     </nav>
 
-    <!-- Search Bar -->
-    <header class="search-header">
-        <input type="text" id="search-bar" placeholder="Search patients..." onkeyup="filterTable()">
-    </header>
+    <!-- Messages Table -->
+    <section class="messages-table-section">
+        <h2>Messages from Users</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Message</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($msg_row = $msg_result->fetch_assoc()) : ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($msg_row['id']); ?></td>
+                        <td><?php echo htmlspecialchars($msg_row['name']); ?></td>
+                        <td><?php echo htmlspecialchars($msg_row['message']); ?></td>
+                        <td>
+                            <form method="POST" action="delete_message.php">
+                                <button type="submit" name="delete"
+                                    value="<?php echo $msg_row['id']; ?>">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
 
     <!-- Patient Table -->
     <section class="patient-table-section">
         <h2>Manage Patients</h2>
+        <!-- Search Bar -->
+        <header class="search-header">
+            <input type="text" id="search-bar" placeholder="Search patients..." onkeyup="filterTable()">
+        </header>
         <div class="table-container">
             <form method="POST" action="update_meals.php">
                 <table>
@@ -99,6 +136,8 @@ $result = $conn->query($sql);
             </form>
         </div>
     </section>
+
+
 
     <!-- Footer -->
     <footer class="footer">
