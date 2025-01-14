@@ -53,6 +53,7 @@ $msg_result = $conn->query($msg_sql);
 
         <ul class="nav-links">
             <li><a href="nutritionist_dashboard.php">Home</a></li>
+            <li><a href="user_details.php">Patient Details</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </nav>
