@@ -5,23 +5,30 @@ include 'db_config.php';
 // Start session
 session_start();
 
-// Redirect to login if user is not logged in
-// if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'user') {
-//     header("Location: login.php");
-//     exit();
-// }
+// Check if user is logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
 
-// Fetch user details from the database
 $user_id = $_SESSION['user_id'];
+
+// Fetch user details for profile form
 $sql = "SELECT * FROM users WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
-$result = $stmt->get_result();
-$user = $result->fetch_assoc();
+$user = $stmt->get_result()->fetch_assoc();
 
-// Handle profile update
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
+// Fetch details for the details form
+$details_sql = "SELECT * FROM user_details WHERE user_id = ?";
+$details_stmt = $conn->prepare($details_sql);
+$details_stmt->bind_param("i", $user_id);
+$details_stmt->execute();
+$user_details = $details_stmt->get_result()->fetch_assoc();
+
+// Handle profile form update
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_profile'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -32,18 +39,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
 
     if ($update_stmt->execute()) {
         $success_message = "Profile updated successfully!";
-        // Refresh user details
-        $stmt = $conn->prepare($sql); // Prepare the SELECT statement again
-        $stmt->bind_param("i", $user_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $user = $result->fetch_assoc();
     } else {
         $error_message = "Failed to update profile. Please try again.";
     }
 }
 
+// Handle details form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_details'])) {
+    $age = $_POST['age'];
+    $weight = $_POST['weight'];
+    $height = $_POST['height'];
+    $goal = $_POST['goal'];
+
+    if ($user_details) {
+        // Update existing record
+        $update_details_sql = "UPDATE user_details SET age = ?, weight = ?, height = ?, goal = ? WHERE user_id = ?";
+        $update_details_stmt = $conn->prepare($update_details_sql);
+        $update_details_stmt->bind_param("iidsi", $age, $weight, $height, $goal, $user_id);
+        $update_details_stmt->execute();
+    } else {
+        // Insert new record
+        $insert_details_sql = "INSERT INTO user_details (user_id, age, weight, height, goal) VALUES (?, ?, ?, ?, ?)";
+        $insert_details_stmt = $conn->prepare($insert_details_sql);
+        $insert_details_stmt->bind_param("iidis", $user_id, $age, $weight, $height, $goal);
+        $insert_details_stmt->execute();
+    }
+    $details_success_message = "Details saved successfully!";
+    header("Refresh:0");
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -115,31 +140,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
             <div class="one_form" style="flex: 1;">
                 <h2>Set Your Details</h2>
                 <form id="details-form" method="post" class="auth-form">
-
-                    <label for="name">Name:</label>
-                    <input type="text" name="name" id="name" value="<?php echo htmlspecialchars($user['name']); ?>"
-                        readonly>
-
-
                     <label for="age">Age:</label>
-                    <input type="number" id="age" name="age" required>
+                    <input type="number" id="age" name="age" value="<?php echo $user_details['age'] ?? ''; ?>" required>
 
                     <label for="weight">Weight (kg):</label>
-                    <input type="number" id="weight" name="weight" required>
+                    <input type="number" id="weight" name="weight" value="<?php echo $user_details['weight'] ?? ''; ?>"
+                        required>
 
                     <label for="height">Height (cm):</label>
-                    <input type="number" id="height" name="height" required>
+                    <input type="number" id="height" name="height" value="<?php echo $user_details['height'] ?? ''; ?>"
+                        required>
 
                     <label for="goal">Goal:</label>
                     <select id="goal" name="goal">
-                        <option value="weight-loss">Weight Loss</option>
-                        <option value="muscle-gain">Muscle Gain</option>
-                        <option value="healthy-living">Healthy Living</option>
+                        <option value="weight-loss"
+                            <?php echo (isset($user_details['goal']) && $user_details['goal'] === 'weight-loss') ? 'selected' : ''; ?>>
+                            Weight Loss</option>
+                        <option value="muscle-gain"
+                            <?php echo (isset($user_details['goal']) && $user_details['goal'] === 'muscle-gain') ? 'selected' : ''; ?>>
+                            Muscle Gain</option>
+                        <option value="healthy-living"
+                            <?php echo (isset($user_details['goal']) && $user_details['goal'] === 'healthy-living') ? 'selected' : ''; ?>>
+                            Healthy Living</option>
                     </select>
 
-                    <button type="submit" class="auth-button">Save</button>
+
+                    <button type="submit" name="save_details" class="auth-button">Save</button>
                 </form>
             </div>
+
         </div>
     </section>
 
