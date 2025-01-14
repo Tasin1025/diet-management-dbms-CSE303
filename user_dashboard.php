@@ -88,33 +88,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
         </div>
     </section>
 
-    <!-- User Details Section -->
-    <section class="features">
-        <h2>Your Profile</h2>
-        <!-- Success/Error Messages -->
-        <?php if (!empty($success_message)) : ?>
-        <p class="success-message"><?php echo $success_message; ?></p>
-        <?php endif; ?>
-        <?php if (!empty($error_message)) : ?>
-        <p class="error-message"><?php echo $error_message; ?></p>
-        <?php endif; ?>
+    <section class="features" id="forms-flex">
+        <div class="forms" style="display: flex; gap: 20px;">
+            <!-- Profile Form -->
+            <div class="one_form" style="flex: 1;">
+                <h2>Your Profile</h2>
+                <form id="profile-form" method="post" class="auth-form">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" id="name" value="<?php echo htmlspecialchars($user['name']); ?>"
+                        readonly>
 
-        <form id="profile-form" method="post" class="auth-form">
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" value="<?php echo htmlspecialchars($user['name']); ?>" readonly>
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" id="email" value="<?php echo htmlspecialchars($user['email']); ?>"
+                        readonly>
 
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" value="<?php echo htmlspecialchars($user['email']); ?>"
-                readonly>
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password"
+                        value="<?php echo htmlspecialchars($user['password']); ?>" readonly>
 
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password"
-                value="<?php echo htmlspecialchars($user['password']); ?>" readonly>
+                    <button type="button" id="edit-button" class="auth-button" onclick="enableEdit()">Edit</button>
+                    <button type="submit" id="save-button" name="save" class="auth-button"
+                        style="display: none;">Save</button>
+                </form>
+            </div>
+            <!--  Details Form -->
+            <div class="one_form" style="flex: 1;">
+                <h2>Set Your Details</h2>
+                <form id="details-form" method="post" class="auth-form">
 
-            <button type="button" id="edit-button" class="auth-button" onclick="enableEdit()">Edit</button>
-            <button type="submit" id="save-button" name="save" class="auth-button" style="display: none;">Save</button>
-        </form>
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" id="name" value="<?php echo htmlspecialchars($user['name']); ?>"
+                        readonly>
+
+
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="age" required>
+
+                    <label for="weight">Weight (kg):</label>
+                    <input type="number" id="weight" name="weight" required>
+
+                    <label for="height">Height (cm):</label>
+                    <input type="number" id="height" name="height" required>
+
+                    <label for="goal">Goal:</label>
+                    <select id="goal" name="goal">
+                        <option value="weight-loss">Weight Loss</option>
+                        <option value="muscle-gain">Muscle Gain</option>
+                        <option value="healthy-living">Healthy Living</option>
+                    </select>
+
+                    <button type="submit" class="auth-button">Save</button>
+                </form>
+            </div>
+        </div>
     </section>
+
 
     <!-- Feature Highlights -->
     <section class="features" id="about">

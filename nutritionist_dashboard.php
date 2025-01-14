@@ -16,6 +16,7 @@ $sql = "
     SELECT 
         users.id AS user_id, 
         users.name AS user_name, 
+        users.email AS user_email,
         GROUP_CONCAT(CASE WHEN meals.meal_type = 'Breakfast' THEN meals.meal_item END) AS breakfast,
         GROUP_CONCAT(CASE WHEN meals.meal_type = 'Lunch' THEN meals.meal_item END) AS lunch,
         GROUP_CONCAT(CASE WHEN meals.meal_type = 'Dinner' THEN meals.meal_item END) AS dinner
@@ -25,6 +26,7 @@ $sql = "
 ";
 
 $result = $conn->query($sql);
+
 
 // Fetch all contact messages
 $msg_sql = "SELECT * FROM contact_messages ORDER BY created_at DESC";
@@ -89,7 +91,7 @@ $msg_result = $conn->query($msg_sql);
 
 
 
-    <!-- Patient Table -->
+
     <section class="patient-table-section">
         <h2>Manage Patients</h2>
         <!-- Search Bar -->
@@ -103,6 +105,7 @@ $msg_result = $conn->query($msg_sql);
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
+                            <th>Email</th>
                             <th>Breakfast</th>
                             <th>Lunch</th>
                             <th>Dinner</th>
@@ -114,6 +117,7 @@ $msg_result = $conn->query($msg_sql);
                         <tr>
                             <td><?php echo htmlspecialchars($row['user_id']); ?></td>
                             <td><?php echo htmlspecialchars($row['user_name']); ?></td>
+                            <td><?php echo htmlspecialchars($row['user_email']); ?></td>
                             <td>
                                 <textarea
                                     name="breakfast[<?php echo $row['user_id']; ?>]"><?php echo htmlspecialchars($row['breakfast']); ?></textarea>
@@ -136,6 +140,7 @@ $msg_result = $conn->query($msg_sql);
             </form>
         </div>
     </section>
+
 
 
 

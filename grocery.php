@@ -13,7 +13,7 @@
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="logo">
-            <img src="logo.png" alt="Diet Planner Logo"> <!-- Replace "logo.png" with your logo file path -->
+            <img src="logo.png" alt="Diet Planner Logo">
         </div>
         <ul class="nav-links">
             <li><a href="user_dashboard.php">Home</a></li>
